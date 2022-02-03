@@ -21,3 +21,23 @@
 # 자기 자신을 신고하는 경우는 없습니다.
 # 1 ≤ k ≤ 200, k는 자연수입니다.
 # return 하는 배열은 id_list에 담긴 id 순서대로 각 유저가 받은 결과 메일 수를 담으면 됩니다.
+
+def solution(id_list, report, k):
+    answer = [0 for i in range(len(id_list))]
+    rep = list(set(report))
+    li1 = {}
+    li2 = {}
+    for i in range(len(id_list)) :
+        li1[id_list[i]] = i
+    for j in rep :
+        tmp = j.split()
+        if tmp[1] not in li2 :
+            li2[tmp[1]] = 1
+        else :
+            li2[tmp[1]] += 1 
+    for j in rep :
+        tmp = j.split()
+        if li2[tmp[1]] >= k :
+            answer[li1[tmp[0]]] += 1
+        
+    return answer
