@@ -27,17 +27,21 @@ def solution(name):
     route = len(name) - 1
     for c in name :
         position = ord(c)
-        if position < 77 :
+        if position < 78 :
             answer += (position - 65)
         else :
             answer += (91 - position)  
             
     for i in range(1, len(name)) :
-        if name[i] == 'A' :
+        if name[i] == 'A' and i != len(name) - 1 :
             cnt += 1
+        elif name[i] == 'A' :
+            cnt += 1
+            route = min(route, len(name) -1  - cnt)
+            cnt = 0
         elif cnt != 0 :
             maxposition = i - 1
             route = min(route, (len(name) - 1 - maxposition) * 2 + maxposition - cnt, (maxposition - cnt) * 2 + len(name)- 1 - maxposition)
             cnt = 0
-            
+    
     return answer + route
