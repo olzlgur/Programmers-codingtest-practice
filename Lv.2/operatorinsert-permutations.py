@@ -1,7 +1,7 @@
 from itertools import *
 
 def main():
-    min, max = 1000000000, 0
+    min, max = 1e9, -1e9
     num = int(input())
     arr = input().split()
     temp = list(map(int, input().split()))
