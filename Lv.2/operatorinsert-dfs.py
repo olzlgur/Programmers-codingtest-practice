@@ -13,14 +13,14 @@ def dfs(depth, total, plus, minus, mul, div):
     minnum = min(total, minnum)
     return
     
-  if plus:
+  if plus: 
     dfs(depth + 1, total + num[depth], plus - 1, minus, mul, div)
-  if minus:
+  if minus: 
     dfs(depth + 1, total - num[depth], plus, minus - 1, mul, div)
-  if mul:
+  if mul: 
     dfs(depth + 1, total * num[depth], plus, minus, mul - 1, div)
   if div:
-    dfs(depth + 1, int(total / num[depth]), plus, minus, mul, div - 1)
+    dfs(depth + 1, total // num[depth], plus, minus, mul, div - 1)
 
 
 dfs(1, num[0], operator[0], operator[1], operator[2], operator[3])
