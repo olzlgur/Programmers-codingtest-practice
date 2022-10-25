@@ -1,7 +1,7 @@
 def main() :
     n = int(input())
     t,p = [],[]
-    dp = [0] * (n+1)
+    dp = [0] * n
     for i in range(n):
         x,y = map(int,input().split())
         t.append(x)
@@ -13,5 +13,4 @@ def main() :
             continue
         dp[i+t[i]] = max(M+p[i], dp[i+t[i]])
     print(max(dp))
-
 main()
