@@ -8,16 +8,16 @@ def main():
 def dfs(x, y, n, m):
     if x == n and y == m:
         return   
-    if x + 1 < n and M[x+1][y] == 1:
+    if x + 1 < n and (M[x+1][y] == 1 or M[x+1][y] > M[x][y]):
         M[x+1][y] = M[x][y] + 1
         dfs(x+1, y, n, m)
-    if x - 1 >= 0 and M[x-1][y] == 1:
+    if x - 1 >= 0 and (M[x-1][y] == 1 or M[x-1][y] > M[x][y]):
         M[x-1][y] = M[x][y] + 1
         dfs(x-1, y, n, m)
-    if y + 1 < m and M[x][y+1] == 1:
+    if y + 1 < m and (M[x][y+1] == 1 or M[x][y+1] > M[x][y]):
         M[x][y+1] = M[x][y] + 1
         dfs(x, y+1, n, m)
-    if y - 1 >= 0 and M[x][y-1] == 1:
+    if y - 1 >= 0 and (M[x][y-1] == 1 or M[x][y-1] > M[x][y]):
         M[x][y-1] = M[x][y] + 1
         dfs(x, y-1, n, m)
 main()
