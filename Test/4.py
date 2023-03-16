@@ -1,37 +1,17 @@
-import copy, sys
-sys.setrecursionlimit(10**5)
-def solution(boards):
-    answer = []
-    visited = []
-    blen = len(boards[0])
-    for i in range(blen) :
-        visited.append([0]*blen)
-    for board in boards:
-        count = 0
-        for i in range(blen):
-            for j in range(blen):
-                if board[i][j] == "2" :
-                    y, x = i, j
-                elif board[i][j] == "1" :
-                    count += 1
-        dfs(int(y), int(x), copy.deepcopy(visited), copy.deepcopy(board), count, 0)
-    return answer
+def solution(n, m, k):
+    answer = -1
+    dp = []
+    for i in range(n):    
+        dp.append([0]*(m+1))
+    for i in range(1, k+1):
+        dp[0][i] = 1
 
-def dfs(y, x, visited, board, count, depth):
-    print(depth, count, y, x)
-    if depth == count :
-        return 1
+    for w in range(1, n):
+        for i in range(1, k+1):
+            for j in range(1, len(dp[0])):
+                if j+i < len(dp[0]):
+                    dp[w][j+i] += dp[w-1][j]
+    return dp[n-1][-1] % 1000007
 
-    dx = [0, 0, -1, 1]
-    dy = [1, -1, 0, 0]
-    visited[y][x] = 1
-    board[y][x] = "0"
-    
-    for i in range(4):
-        tx = x + dx[i]
-        ty = y + dy[i]
-        print(ty, tx)
-        if 0 <= tx < len(board) and 0 <= ty < len(board) and board[ty][tx] == "1" and visited[ty][tx] == 0 :
-            dfs(ty, tx, copy.deepcopy(visited), copy.deepcopy(board), count + 1)
 
-solution([["00011", "01111", "21001", "11001", "01111"]])
+solution(3, 6, 3)
