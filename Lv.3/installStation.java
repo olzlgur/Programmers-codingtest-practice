@@ -24,6 +24,7 @@
 // 문제의 예시와 같습니다
 // 입출력 예 #2
 // 초기에, 1~6, 12~16번째 아파트에는 전파가 전달되지 않습니다.
+
 // 3, 6, 14번째 아파트 옥상에 기지국을 설치할 경우 모든 아파트에 전파를 전달할 수 있습니다.
 
 
@@ -34,23 +35,28 @@ class Solution {
         int answer = 0;
         int stationSize = stations.length-1;
         
+        // 첫 번째 기지국이 해당 기지국의 왼쪽을 모두 전파하지 못하는 경우
         if(1 < stations[0] - w){
+        	// 전파하지 못하는 구간의 길이를 기지국 하나가 전파할 수 있는 거리로 나눈 몫을 더해준다.
             answer += Math.floorDiv(Math.max(0, stations[0]-w-1), w*2+1);
+            // 나머지가 있는 경우 기지국 1개 추가 
             if(Math.floorMod(Math.max(0, stations[0]-w-1), w*2+1) != 0){
                 answer += 1;
             }
         }
         
-        
+        // 각 기지국들의 사이에 전파하지 못하는 구간이 있는 경우 
         for(int i=0; i<stationSize; i++){
+        // 같은 방식으로 추가 건설
             answer += Math.floorDiv(Math.max(0, stations[i+1]-2*w-stations[i]-1), w*2+1);
             if(Math.floorMod(Math.max(0, stations[i+1]-2*w-stations[i]-1), w*2+1)!=0) {
                 answer += 1;
             }
         }
         
-        
+        // 마지막 기지국이 오른쪽을 모두 전파하지 못하는 경우
         if(stations[stationSize] + w < n ) {
+        // 같은 방식으로 추가 건설
             answer += Math.floorDiv(Math.max(0, n - stations[stationSize] - w), w*2+1);
             if(Math.floorMod(Math.max(0, n - stations[stationSize] - w), w*2+1) != 0){
                 answer += 1;
